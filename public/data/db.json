@@ -1,0 +1,91 @@
+{
+  "products": [
+    {
+      "id": "1",
+      "name": "Camisa Loading Jr.",
+      "description": "Camisa 100% algodão com a estampa exclusiva da Loading.",
+      "price": 49.90,
+      "category": "Vestuário",
+      "images": ["/src/assets/camisa.png", "/src/assets/camisa_costas.png"],
+      "stock": 20
+    },
+    {
+      "id": "2",
+      "name": "Caneca Dev Loading Jr.",
+      "description": "Caneca de cerâmica preta, perfeita para o café das madrugadas.",
+      "price": 39.90,
+      "category": "Acessórios",
+      "images": ["/src/assets/caneca.png"],
+      "stock": 15
+    },
+    {
+      "id": "3",
+      "name": "Boné Loading Jr.",
+      "description": "Boné de algodão roxo, perfeito para o dia a dia.",
+      "price": 29.99,
+      "category": "Vestuário",
+      "images": ["/src/assets/bone.png"],
+      "stock": 5
+    },
+    {
+      "id": "4",
+      "name": "Keycaps Loading Jr.",
+      "description": "Keycap de plástico com estampa exclusiva da Loading.",
+      "price": 19.90,
+      "category": "Equipamentos",
+      "images": ["/src/assets/keycap2.png", "/src/assets/keycap.png", "/src/assets/keycap3.png"],
+      "stock": 8
+    },
+    {
+      "id": "5",
+      "name": "Mousepad Gengar Loading Jr.",
+      "description": "Mousepad com estampa exclusiva do mascote da Loading.",
+      "price": 26.90,
+      "category": "Equipamentos",
+      "images": ["/src/assets/mousepad1.png", "/src/assets/mousepad2.png"],
+      "stock": 15
+    }
+  ],
+  "orders": [
+    {
+      "id": "#1027",
+      "userId": "1",
+      "date": "Hoje",
+      "total": "R$ 49,90",
+      "status": "A Pagar",
+      "isActive": true
+    },
+    {
+      "id": "#1026",
+      "userId": "1",
+      "date": "Ontem",
+      "total": "R$ 34,90",
+      "status": "Preparando",
+      "isActive": true
+    },
+    {
+      "id": "#1025",
+      "userId": "1",
+      "date": "10 Fev 2026",
+      "total": "R$ 84,80",
+      "status": "A Caminho",
+      "isActive": true
+    },
+    {
+      "id": "#1024",
+      "userId": "1",
+      "date": "05 Fev 2026",
+      "total": "R$ 134,70",
+      "status": "A Avaliar",
+      "isActive": false
+    },
+    {
+      "id": "#1023",
+      "userId": "1",
+      "date": "20 Jan 2026",
+      "total": "R$ 49,90",
+      "status": "Entregue",
+      "isActive": false
+    }
+  ]
+}
