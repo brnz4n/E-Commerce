@@ -28,8 +28,8 @@ O objetivo foi construir uma interface de e-commerce completa, moderna e altamen
 
 | Modal de Produto | Carrinho & Checkout |
 | :---: | :---: |
-| ![Modal](src/assets/produtos.png) | ![Carrinho](src/assets/cart.png) | ![Checkout](src/assets/checkout.png)
-
+| ![Modal](src/assets/produtos.png) | ![Carrinho](src/assets/cart.png) |
+| ![Checkout](src/assets/checkout.png)
 ---
 
 ## ✨ Funcionalidades Implementadas
