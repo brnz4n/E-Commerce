@@ -20,15 +20,15 @@ O objetivo foi construir uma interface de e-commerce completa, moderna e altamen
 
 | Home & Dark Mode | Produtos & Filtros |
 | :---: | :---: |
-| ![Home](assets/home.png) | ![Produtos](assets/destaque.png) |
+| ![Home](src/assets/home.png) | ![Produtos](src/assets/destaque.png) |
 
 | Autenticação (Login / Registro) | Perfil do Usuário |
 | :---: | :---: |
-| ![Auth](assets/autenticacao.png) | ![Perfil](assets/perfil.png) |
+| ![Auth](src/assets/autenticacao.png) | ![Perfil](src/assets/perfil.png) |
 
 | Modal de Produto | Carrinho & Checkout |
 | :---: | :---: |
-| ![Modal](assets/produtos.png) | ![Carrinho](assets/cart.png) |
+| ![Modal](src/assets/produtos.png) | ![Carrinho](src/assets/cart.png) |
 
 ---
 
