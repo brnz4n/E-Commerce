@@ -5,24 +5,13 @@ import { Link, useNavigate } from 'react-router-dom';
 import { User, Package, LogOut, ShoppingBag, Clock, Truck, CheckCircle, CreditCard } from 'lucide-react';
 import { Header } from '../components/Header';
 import { fetchOrders } from '../services/api';
-
-// Definindo o tipo para os pedidos que vêm do JSON
-interface OrderData {
-  id: string;
-  userId: string;
-  date: string;
-  total: string;
-  status: string;
-  isActive: boolean;
-}
+import type { Order } from '../types/order';
 
 export function Profile() {
   const { user, logout } = useContext(AuthContext);
   const navigate = useNavigate();
   const [activeTab, setActiveTab] = useState<'status' | 'history'>('status');
-  
-  // Estado para armazenar os dados que vêm do db.json
-  const [orders, setOrders] = useState<OrderData[]>([]);
+  const [orders, setOrders] = useState<Order[]>([]);
 
   useEffect(() => {
     fetchOrders().then((data) => {
@@ -37,22 +26,20 @@ export function Profile() {
 
   if (!user) {
     return (
-      <div className="min-h-screen flex flex-col bg-gray-50 dark:bg-gray-900 transition-colors">
+      <div className="min-h-screen flex flex-col bg-gray-50 dark:bg-[#0f061a] transition-colors">
         <Header />
         <main className="flex-grow flex items-center justify-center p-4 text-center">
           <div>
             <h2 className="text-2xl font-bold text-gray-900 dark:text-white mb-4">Você não está conectado.</h2>
-            <Link to="/login" className="bg-purple-600 text-white px-6 py-3 rounded-lg hover:bg-purple-700 transition font-semibold">
+            <Link to="/login" className="bg-purple-600 text-white px-6 py-3 rounded-lg hover:bg-purple-700 transition font-semibold shadow-md">
               Fazer Login
             </Link>
           </div>
         </main>
-        <Footer />
       </div>
     );
   }
 
-  // Filtrando os pedidos com base no db.json
   const activeOrders = orders.filter(order => order.isActive);
   const historyOrders = orders.filter(order => !order.isActive);
 
@@ -67,7 +54,7 @@ export function Profile() {
   };
 
   return (
-    <div className="min-h-screen flex flex-col bg-gray-50 dark:bg-gray-900 transition-colors">
+    <div className="min-h-screen flex flex-col bg-gray-50 dark:bg-[#0f061a] transition-colors">
       <Header />
       <main className="flex-grow container mx-auto px-4 py-8 max-w-6xl mt-6 animate-fade-in-up">
         <h1 className="text-3xl font-bold text-gray-900 dark:text-white mb-8">Minha Conta</h1>
@@ -77,7 +64,7 @@ export function Profile() {
           <div className="lg:col-span-1 space-y-6">
             <div className="bg-white dark:bg-gray-800 p-6 rounded-2xl shadow-sm border border-gray-100 dark:border-gray-700">
               <div className="flex flex-col items-center text-center gap-3 mb-6">
-                <div className="w-20 h-20 bg-purple-100 dark:bg-purple-900/30 text-purple-600 dark:text-purple-400 rounded-full flex items-center justify-center">
+                <div className="w-20 h-20 bg-purple-100 dark:bg-purple-900/30 text-purple-600 dark:text-purple-400 rounded-full flex items-center justify-center border border-purple-200 dark:border-purple-800">
                   <User size={40} />
                 </div>
                 <div>
@@ -125,20 +112,19 @@ export function Profile() {
                   <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 mb-8">
                     <div className="p-4 rounded-xl border border-orange-100 bg-orange-50 dark:border-orange-900/30 dark:bg-orange-900/10 flex items-center gap-4">
                       <CreditCard className="text-orange-500" size={28} />
-                      <div><p className="text-sm text-gray-500">A Pagar</p><p className="font-bold text-xl dark:text-white">{activeOrders.filter(o => o.status === 'A Pagar').length}</p></div>
+                      <div><p className="text-sm text-gray-500 dark:text-gray-400">A Pagar</p><p className="font-bold text-xl dark:text-white">{activeOrders.filter(o => o.status === 'A Pagar').length}</p></div>
                     </div>
                     <div className="p-4 rounded-xl border border-blue-100 bg-blue-50 dark:border-blue-900/30 dark:bg-blue-900/10 flex items-center gap-4">
                       <Clock className="text-blue-500" size={28} />
-                      <div><p className="text-sm text-gray-500">Preparando</p><p className="font-bold text-xl dark:text-white">{activeOrders.filter(o => o.status === 'Preparando').length}</p></div>
+                      <div><p className="text-sm text-gray-500 dark:text-gray-400">Preparando</p><p className="font-bold text-xl dark:text-white">{activeOrders.filter(o => o.status === 'Preparando').length}</p></div>
                     </div>
                     <div className="p-4 rounded-xl border border-purple-100 bg-purple-50 dark:border-purple-900/30 dark:bg-purple-900/10 flex items-center gap-4">
                       <Truck className="text-purple-500" size={28} />
-                      <div><p className="text-sm text-gray-500">A Caminho</p><p className="font-bold text-xl dark:text-white">{activeOrders.filter(o => o.status === 'A Caminho').length}</p></div>
+                      <div><p className="text-sm text-gray-500 dark:text-gray-400">A Caminho</p><p className="font-bold text-xl dark:text-white">{activeOrders.filter(o => o.status === 'A Caminho').length}</p></div>
                     </div>
                   </div>
 
                   <div className="space-y-4">
-
                     {activeOrders.map((order) => {
                       const visuals = getStatusVisuals(order.status);
                       return (

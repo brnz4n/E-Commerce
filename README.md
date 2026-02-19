@@ -1,73 +1,164 @@
-# React + TypeScript + Vite
+# 💜 Loading Store – E-Commerce Platform
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+![Status](https://img.shields.io/badge/Status-Concluído-success)
+![Front](https://img.shields.io/badge/Front--End-React%20%7C%20TypeScript%20%7C%20TailwindCSS-purple)
+![Build](https://img.shields.io/badge/Build-Vite-yellow)
+![State](https://img.shields.io/badge/State-Context%20API-blue)
+![UI](https://img.shields.io/badge/UI-Dark%20%2F%20Light%20Mode-indigo)
 
-Currently, two official plugins are available:
+Projeto Frontend desenvolvido como desafio prático para o **Processo Seletivo 2026.1 da Loading Jr**.
+O objetivo foi construir uma interface de e-commerce completa, moderna e altamente funcional, priorizando:
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+- Organização e abstração de código
+- Responsividade total (mobile-first)
+- Experiência do usuário (UX)
+- Preparação para integração com back-end real
 
-## React Compiler
+---
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+## 📸 Telas do Sistema
 
-## Expanding the ESLint configuration
+| Home & Dark Mode | Produtos & Filtros |
+| :---: | :---: |
+| ![Home](assets/home.png) | ![Produtos](assets/destaque.png) |
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+| Autenticação (Login / Registro) | Perfil do Usuário |
+| :---: | :---: |
+| ![Auth](assets/autenticacao.png) | ![Perfil](assets/perfil.png) |
 
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+| Modal de Produto | Carrinho & Checkout |
+| :---: | :---: |
+| ![Modal](assets/produtos.png) | ![Carrinho](assets/cart.png) |
 
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
+---
 
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
+## ✨ Funcionalidades Implementadas
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+O projeto atende aos requisitos obrigatórios e bônus definidos no processo seletivo:
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+- **🏠 Home**
+  - Banners de destaque
+  - Produtos em alta
+  - Navegação rápida por categorias
 
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
+- **🛍️ Listagem Dinâmica de Produtos**
+  - Busca por texto
+  - Filtro por categorias
+  - Estado sincronizado via URL
+
+- **📦 Visualização de Produto**
+  - Modal e página dedicada
+  - Informações detalhadas (preço, descrição, estoque)
+
+- **🔐 Autenticação**
+  - Login e Registro
+  - Fluxo otimizado para conversão
+  - Layout inspirado em grandes plataformas de e-commerce
+
+- **👤 Perfil do Usuário**
+  - Visualização de pedidos ativos
+  - Histórico de compras
+  - Status visuais:
+    - A Pagar
+    - Preparando
+    - A Caminho
+    - Entregue
+
+- **🛒 Carrinho & Checkout (Extra)**
+  - Adição e remoção de produtos
+  - Cálculo de valores
+  - Simulação de checkout completo
+
+---
+
+## 🌟 Diferenciais (Bônus)
+
+- **🌗 Dark / Light Mode Nativo**
+  - Gerenciado via Tailwind CSS v4 + Context API
+  - Preferência de tema salva no dispositivo
+
+- **💾 Persistência de Dados**
+  - Sessão do usuário
+  - Tema selecionado
+  - Itens do carrinho
+  - Tudo mantido via `localStorage`
+
+---
+
+## 🛠️ Tecnologias Utilizadas
+
+A stack foi escolhida visando escalabilidade, tipagem forte e fácil manutenção:
+
+- **React.js** (Vite)
+- **TypeScript**
+- **Tailwind CSS v4**
+- **React Router DOM**
+- **Context API**
+  - Autenticação
+  - Carrinho
+  - Tema (Dark/Light)
+- **Lucide React** (Ícones)
+
+---
+
+## 🏗️ Arquitetura e Abstração de Dados
+
+Um dos principais focos do projeto foi preparar o Frontend para integração futura com um back-end real.
+
+- Dados desacoplados dos componentes de UI
+- Consumo centralizado via `services/api.ts`
+- Tipagem forte definida em `src/types/`
+- Mock de dados estruturado para fácil substituição por API real
+
+---
+
+## 📄 Documentação da Mock API
+
+### 🧩 Entidade: Produto (`Product`)
+
+| Campo | Tipo | Descrição |
+| :--- | :--- | :--- |
+| `id` | `string` | Identificador único do produto |
+| `name` | `string` | Nome do produto |
+| `description` | `string` | Descrição detalhada |
+| `price` | `number` | Preço unitário |
+| `category` | `string` | Categoria do produto |
+| `images` | `string[]` | Lista de imagens |
+| `stock` | `number` | Quantidade disponível |
+
+---
+
+### 📦 Entidade: Pedido (`Order`)
+
+| Campo | Tipo | Descrição |
+| :--- | :--- | :--- |
+| `id` | `string` | Código do pedido (ex: `#1027`) |
+| `userId` | `string` | ID do usuário |
+| `date` | `string` | Data do pedido |
+| `total` | `string` | Valor total formatado |
+| `status` | `string` | Status do pedido |
+| `isActive` | `boolean` | Pedido ativo ou finalizado |
+
+---
+
+## 🚀 Como executar o projeto localmente
+
+### 1️⃣ Clone o repositório
+```bash
+git clone https://github.com/SEU_USUARIO/NOME_DO_REPOSITORIO.git
+
+2️⃣ Acesse a pasta do projeto
+```bash
+cd NOME_DO_REPOSITORIO
+
+3️⃣ Instale as dependências
+```bash
+npm install
+
+4️⃣ Inicie o servidor de desenvolvimento
+```bash
+npm run dev
+
+5️⃣ Acesse no navegador
+```bash
+http://localhost:5173

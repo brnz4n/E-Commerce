@@ -103,42 +103,46 @@ export function Header() {
                 )}
               </Link>
               
-              <div className="absolute right-0 top-full mt-2 w-80 bg-white dark:bg-gray-800 rounded-xl shadow-2xl border border-gray-100 dark:border-gray-700 opacity-0 invisible group-hover:opacity-100 group-hover:visible translate-y-2 group-hover:translate-y-0 transition-all duration-300 transform origin-top-right">
-                <div className="p-4">
-                  <h3 className="text-sm font-bold text-gray-900 dark:text-white mb-3 flex justify-between">
-                    Seu Carrinho <span className="text-purple-600">{cartCount} itens</span>
-                  </h3>
-                  
-                  {cartItems.length === 0 ? (
-                    <div className="text-center py-6">
-                      <ShoppingCart size={40} className="mx-auto text-gray-300 mb-2" />
-                      <p className="text-gray-500 text-sm">Vazio</p>
-                    </div>
-                  ) : (
-                    <div className="max-h-60 overflow-y-auto space-y-3 custom-scrollbar pr-1">
-                      {cartItems.map((item) => (
-                        <div key={item.id} className="flex gap-3 items-center group/item hover:bg-gray-50 dark:hover:bg-gray-700/50 p-2 rounded-lg transition-colors">
-                          <img src={item.images[0]} alt={item.name} className="w-12 h-12 rounded-md object-contain bg-white border border-gray-200 dark:border-gray-700" />
-                          <div className="flex-1 min-w-0">
-                            <p className="text-sm font-medium text-gray-900 dark:text-white truncate">{item.name}</p>
-                            <p className="text-xs text-gray-500 dark:text-gray-400">{item.quantity} x <span className="text-purple-600 font-bold">R$ {item.price}</span></p>
+              {/* Dropdown do Carrinho (Corrigido com pt-2 e bg-white passado pro filho) */}
+              <div className="absolute right-0 top-full pt-2 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 w-80 z-50 transform origin-top-right">
+                <div className="bg-white dark:bg-gray-800 rounded-xl shadow-2xl border border-gray-100 dark:border-gray-700">
+                  <div className="p-4">
+                    <h3 className="text-sm font-bold text-gray-900 dark:text-white mb-3 flex justify-between">
+                      Seu Carrinho <span className="text-purple-600">{cartCount} itens</span>
+                    </h3>
+                    
+                    {cartItems.length === 0 ? (
+                      <div className="text-center py-6">
+                        <ShoppingCart size={40} className="mx-auto text-gray-300 mb-2" />
+                        <p className="text-gray-500 text-sm">Vazio</p>
+                      </div>
+                    ) : (
+                      <div className="max-h-60 overflow-y-auto space-y-3 custom-scrollbar pr-1">
+                        {cartItems.map((item) => (
+                          <div key={item.id} className="flex gap-3 items-center group/item hover:bg-gray-50 dark:hover:bg-gray-700/50 p-2 rounded-lg transition-colors">
+                            <img src={item.images[0]} alt={item.name} className="w-12 h-12 rounded-md object-contain bg-white border border-gray-200 dark:border-gray-700" />
+                            <div className="flex-1 min-w-0">
+                              <p className="text-sm font-medium text-gray-900 dark:text-white truncate">{item.name}</p>
+                              <p className="text-xs text-gray-500 dark:text-gray-400">{item.quantity} x <span className="text-purple-600 font-bold">R$ {item.price}</span></p>
+                            </div>
+                            <button onClick={(e) => { e.preventDefault(); removeFromCart(item.id); }} className="text-gray-400 hover:text-red-500 p-1"><Trash2 size={16} /></button>
                           </div>
-                          <button onClick={(e) => { e.preventDefault(); removeFromCart(item.id); }} className="text-gray-400 hover:text-red-500 p-1"><Trash2 size={16} /></button>
-                        </div>
-                      ))}
-                    </div>
-                  )}
-                  {cartItems.length > 0 && (
-                    <Link to="/cart" className="block w-full bg-purple-600 text-white text-center py-2 mt-4 rounded-lg font-bold text-sm hover:bg-purple-700">
-                      Ver Carrinho
-                    </Link>
-                  )}
+                        ))}
+                      </div>
+                    )}
+                    {cartItems.length > 0 && (
+                      <Link to="/cart" className="block w-full bg-purple-600 text-white text-center py-2 mt-4 rounded-lg font-bold text-sm hover:bg-purple-700">
+                        Ver Carrinho
+                      </Link>
+                    )}
+                  </div>
                 </div>
               </div>
             </div>
 
             <div className="h-8 w-px bg-gray-200 dark:bg-gray-700 hidden sm:block"></div>
 
+            {/* Usuário */}
             {user ? (
               <div className="relative group cursor-pointer z-50">
                 <div className="flex items-center gap-2 text-gray-600 dark:text-gray-300 hover:text-purple-600 dark:hover:text-purple-400 transition-colors py-2">
@@ -152,16 +156,19 @@ export function Header() {
                   <ChevronDown size={16} className="hidden lg:block group-hover:rotate-180 transition-transform duration-300" />
                 </div>
 
-                <div className="absolute right-0 top-full mt-2 w-56 bg-white dark:bg-gray-800 rounded-xl shadow-xl border border-gray-100 dark:border-gray-700 opacity-0 invisible group-hover:opacity-100 group-hover:visible translate-y-2 group-hover:translate-y-0 transition-all duration-300">
-                  <div className="p-4 border-b border-gray-100 dark:border-gray-700">
-                    <p className="font-bold text-gray-900 dark:text-white truncate">{user.name}</p>
-                    <p className="text-xs text-gray-500 dark:text-gray-400 truncate">{user.email}</p>
-                  </div>
-                  <div className="p-2 space-y-1">
-                    <Link to="/profile" className="flex items-center gap-3 px-3 py-2.5 text-sm text-gray-700 dark:text-gray-300 hover:bg-purple-50 dark:hover:bg-gray-700/50 rounded-lg"><User size={18} /> Perfil</Link>
-                  </div>
-                  <div className="p-2 border-t border-gray-100 dark:border-gray-700">
-                    <button onClick={handleLogout} className="w-full flex items-center gap-3 px-3 py-2.5 text-sm text-red-600 hover:bg-red-50 rounded-lg"><LogOut size={18} /> Sair</button>
+                {/* Dropdown do Usuário (Corrigido com pt-2 e bg-white passado pro filho) */}
+                <div className="absolute right-0 top-full pt-2 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 w-56 z-50">
+                  <div className="bg-white dark:bg-gray-800 rounded-xl shadow-xl border border-gray-100 dark:border-gray-700 overflow-hidden">
+                    <div className="p-4 border-b border-gray-100 dark:border-gray-700">
+                      <p className="font-bold text-gray-900 dark:text-white truncate">{user.name}</p>
+                      <p className="text-xs text-gray-500 dark:text-gray-400 truncate">{user.email}</p>
+                    </div>
+                    <div className="p-2 space-y-1">
+                      <Link to="/profile" className="flex items-center gap-3 px-3 py-2.5 text-sm text-gray-700 dark:text-gray-300 hover:bg-purple-50 dark:hover:bg-gray-700/50 rounded-lg"><User size={18} /> Perfil</Link>
+                    </div>
+                    <div className="p-2 border-t border-gray-100 dark:border-gray-700">
+                      <button onClick={handleLogout} className="w-full flex items-center gap-3 px-3 py-2.5 text-sm text-red-600 hover:bg-red-50 rounded-lg"><LogOut size={18} /> Sair</button>
+                    </div>
                   </div>
                 </div>
               </div>
