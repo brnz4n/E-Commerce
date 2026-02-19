@@ -148,17 +148,13 @@ Um dos principais focos do projeto foi preparar o Frontend para integração fut
 git clone https://github.com/SEU_USUARIO/NOME_DO_REPOSITORIO.git
 
 2️⃣ Acesse a pasta do projeto
-```bash
 cd NOME_DO_REPOSITORIO
 
 3️⃣ Instale as dependências
-```bash
 npm install
 
 4️⃣ Inicie o servidor de desenvolvimento
-```bash
 npm run dev
 
 5️⃣ Acesse no navegador
-```bash
 http://localhost:5173
