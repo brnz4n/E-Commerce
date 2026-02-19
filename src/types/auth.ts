@@ -1,12 +1,21 @@
-// src/types/auth.ts
 export interface User {
   id: string;
   name: string;
   email: string;
-  
+  address: Address;
+}
+
+export interface Address {
+  street: string;
+  number: string; // numero da casa
+  complement?: string;
+  neighborhood: string;
+  city: string;
+  state: string;
+  zipCode: string;
 }
 
 // Simulando o que enviaríamos para uma API
-export interface RegisterData extends Omit<User, 'id'> {
-  password?: string; // Opcional aqui pois não vamos salvar a senha no LocalStorage por segurança básica
+export interface RegisterData extends Omit<User, 'id' | 'address'> {
+  password?: string;
 }

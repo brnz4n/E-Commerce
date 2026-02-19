@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import { Trash2, Minus, Plus, ShoppingBag, ArrowRight, Store } from 'lucide-react';
+import { Trash2, Minus, Plus, ShoppingBag, ArrowRight, Store, ArrowLeft } from 'lucide-react';
 import { Header } from '../components/Header';
 import { useCart } from '../contexts/CartContext';
 
@@ -41,9 +41,19 @@ export function Cart() {
 
       <main className="flex-grow container mx-auto px-4 py-8 max-w-7xl">
         
-        <h1 className="text-2xl font-bold text-gray-800 dark:text-white mb-6 flex items-center gap-2 animate-fade-in-up">
-          <ShoppingBag /> Carrinho de Compras
-        </h1>
+        <div className="flex items-center gap-3 mb-6 animate-fade-in-up">
+          <Link
+            to="/products"
+            className="text-gray-500 hover:text-purple-600 dark:text-gray-400 dark:hover:text-purple-400 transition-colors p-2 -ml-2 rounded-full hover:bg-purple-50 dark:hover:bg-gray-800"
+            title="Voltar para os produtos"
+          >
+            <ArrowLeft size={24} />
+          </Link>
+          
+          <h1 className="text-2xl font-bold text-gray-800 dark:text-white flex items-center gap-2">
+            <ShoppingBag /> Carrinho de Compras
+          </h1>
+        </div>
 
         {cartItems.length === 0 ? (
           <div className="bg-white dark:bg-gray-800 rounded-lg shadow-sm p-12 text-center flex flex-col items-center justify-center">
@@ -62,8 +72,8 @@ export function Cart() {
             
             <div className="hidden md:grid grid-cols-12 gap-4 bg-white dark:bg-gray-800 p-4 rounded-lg shadow-sm text-gray-500 dark:text-gray-400 text-sm font-medium items-center animate-fade-in-up">
               <div className="col-span-6 flex items-center gap-4">
-                <input 
-                  type="checkbox" 
+                <input
+                  type="checkbox"
                   className="w-4 h-4 accent-purple-600 cursor-pointer"
                   checked={selectedItems.length === cartItems.length && cartItems.length > 0}
                   onChange={handleSelectAll}
@@ -87,8 +97,8 @@ export function Cart() {
                 <div key={item.id} className="grid grid-cols-1 md:grid-cols-12 gap-4 p-4 border-b border-gray-100 dark:border-gray-700 items-center last:border-0 relative animate-fade-in-up">
                   
                   <div className="col-span-1 md:col-span-6 flex items-start md:items-center gap-4">
-                    <input 
-                      type="checkbox" 
+                    <input
+                      type="checkbox"
                       className="w-4 h-4 accent-purple-600 mt-1 md:mt-0 cursor-pointer"
                       checked={selectedItems.includes(item.id)}
                       onChange={() => handleSelectOne(item.id)}
@@ -110,27 +120,26 @@ export function Cart() {
                     </Link>
                   </div>
 
-                  {/* Coluna Preço Unitário (Desktop) */}
+                  {/* preço unitário pc */}
                   <div className="hidden md:block col-span-2 text-center text-gray-600 dark:text-gray-300">
                     {item.price.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' })}
                   </div>
 
-                  {/* Coluna Quantidade */}
                   <div className="col-span-1 md:col-span-2 flex justify-center">
                     <div className="flex items-center border border-gray-300 dark:border-gray-600 rounded-lg">
-                      <button 
+                      <button
                         onClick={() => updateQuantity(item.id, item.quantity - 1)}
                         className="px-3 py-1 hover:bg-gray-100 dark:hover:bg-gray-700 text-gray-600 dark:text-gray-300 transition"
                       >
                         <Minus size={14} />
                       </button>
-                      <input 
-                        type="text" 
-                        value={item.quantity} 
-                        readOnly 
+                      <input
+                        type="text"
+                        value={item.quantity}
+                        readOnly
                         className="w-10 text-center bg-transparent text-gray-900 dark:text-white font-medium focus:outline-none" 
                       />
-                      <button 
+                      <button
                         onClick={() => updateQuantity(item.id, item.quantity + 1)}
                         className="px-3 py-1 hover:bg-gray-100 dark:hover:bg-gray-700 text-gray-600 dark:text-gray-300 transition"
                       >
@@ -139,14 +148,12 @@ export function Cart() {
                     </div>
                   </div>
 
-                  {/* Coluna Total Item */}
                   <div className="hidden md:block col-span-1 text-center font-bold text-purple-600 dark:text-purple-400">
                     {(item.price * item.quantity).toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' })}
                   </div>
 
-                  {/* Coluna Ações */}
                   <div className="col-span-1 flex justify-center md:justify-center absolute top-4 right-4 md:static">
-                    <button 
+                    <button
                       onClick={() => removeFromCart(item.id)}
                       className="text-gray-400 hover:text-red-500 transition-colors p-2"
                       title="Remover item"
@@ -164,8 +171,8 @@ export function Cart() {
                 
                 <div className="flex items-center gap-6 w-full md:w-auto justify-between md:justify-start">
                   <div className="flex items-center gap-2">
-                    <input 
-                      type="checkbox" 
+                    <input
+                      type="checkbox"
                       id="selectAll"
                       className="w-4 h-4 accent-purple-600 cursor-pointer"
                       checked={selectedItems.length === cartItems.length && cartItems.length > 0}
@@ -191,11 +198,11 @@ export function Cart() {
                     <span className="text-xs text-green-600 dark:text-green-400">Frete Grátis aplicado</span>
                   </div>
 
-                  <Link 
+                  <Link
                     to="/checkout"
                     className={`px-8 py-3 rounded-lg font-bold text-white transition-all shadow-lg text-center ${
-                      countSelected > 0 
-                        ? 'bg-purple-600 hover:bg-purple-700 shadow-purple-500/30' 
+                      countSelected > 0
+                        ? 'bg-purple-600 hover:bg-purple-700 shadow-purple-500/30'
                         : 'bg-gray-400 cursor-not-allowed pointer-events-none'
                     }`}
                   >

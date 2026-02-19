@@ -1,14 +1,17 @@
 import { useState, useEffect } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useSearchParams } from 'react-router-dom';
 import { Header } from '../components/Header';
-import { Footer } from '../components/Footer';
 import { getProducts } from '../services/api';
 import { Search } from 'lucide-react';
 import type { Product } from '../types/Product';
 
-export function Products() { 
+export function Products() {
   const [products, setProducts] = useState<Product[]>([]);
-  const [selectedCategory, setSelectedCategory] = useState<string>('Todas');
+  const [searchParams] = useSearchParams();
+  
+  const searchTermFromURL = searchParams.get('q') || '';
+  const categoryFromURL = searchParams.get('category') || 'Todas';
+  const [selectedCategory, setSelectedCategory] = useState<string>(categoryFromURL);
 
   useEffect(() => {
     getProducts().then((data) => {
@@ -16,12 +19,36 @@ export function Products() {
     });
   }, []);
 
+  useEffect(() => {
+    if (categoryFromURL) {
+      setSelectedCategory(categoryFromURL);
+    }
+  }, [categoryFromURL]);
+
   const categories = ['Todas', ...Array.from(new Set(products.map(p => p.category)))];
 
-  const filteredProducts = selectedCategory === 'Todas' 
-    ? products 
-    : products.filter(p => p.category === selectedCategory);
+  function normalizeString(str: string) {
+    return str
+      .toLowerCase()
+      .normalize('NFD')
+      .replace(/[\u0300-\u036f]/g, "");
+  }
 
+  const filteredProducts = products.filter(product => {
+  const matchesCategory = selectedCategory === 'Todas' || product.category === selectedCategory;
+
+    const term = normalizeString(searchTermFromURL);
+    const productName = normalizeString(product.name);
+    const productDesc = normalizeString(product.description);
+    const productCat = normalizeString(product.category);
+
+    const matchesSearch = productName.includes(term) ||
+                          productDesc.includes(term) ||
+                          productCat.includes(term);
+
+    return matchesCategory && matchesSearch;
+  });
+  
   return (
     <div className="min-h-screen flex flex-col bg-gray-50 dark:bg-[#0f061a] transition-colors">
       <Header />
@@ -30,7 +57,9 @@ export function Products() {
         
         <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 mb-10 animate-fade-in-up">
           <div>
-            <h1 className="text-3xl font-bold text-gray-900 dark:text-white ">Nossos Produtos</h1>
+            <h1 className="text-3xl font-bold text-gray-900 dark:text-white ">
+                {searchTermFromURL ? `Resultados para "${searchTermFromURL}"` : 'Nossos Produtos'}
+            </h1>
             <p className="text-gray-500 dark:text-gray-400 mt-2">Encontre os melhores itens da Loading JR.</p>
           </div>
 
@@ -57,9 +86,9 @@ export function Products() {
               <div key={product.id} className="bg-white dark:bg-gray-800 rounded-2xl shadow-sm border border-gray-100 dark:border-gray-700 overflow-hidden hover:shadow-lg transition-all group">
                 
                 <Link to={`/product/${product.id}`} className="block relative h-64 bg-gray-100 dark:bg-gray-700 flex items-center justify-center p-4 overflow-hidden">
-                  <img 
+                  <img
                     src={product.images[0]}
-                    alt={product.name} 
+                    alt={product.name}
                     className="max-h-full object-contain group-hover:scale-110 transition-transform duration-300"
                   />
                   {product.stock <= 5 && (
@@ -85,7 +114,7 @@ export function Products() {
                       R$ {product.price.toFixed(2).replace('.', ',')}
                     </span>
                     
-                    <Link 
+                    <Link
                       to={`/product/${product.id}`}
                       className="bg-purple-100 dark:bg-purple-900/30 text-purple-600 dark:text-purple-400 p-2 rounded-lg hover:bg-purple-600 hover:text-white dark:hover:bg-purple-500 transition-colors"
                       title="Ver Detalhes Completos"
@@ -99,12 +128,11 @@ export function Products() {
           </div>
         ) : (
           <div className="text-center py-20">
-            <p className="text-xl text-gray-500 dark:text-gray-400">Nenhum produto encontrado nesta categoria.</p>
+            <p className="text-xl text-gray-500 dark:text-gray-400">Nenhum produto encontrado.</p>
           </div>
         )}
 
       </main>
-      
     </div>
   );
 }

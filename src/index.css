@@ -1,5 +1,7 @@
 @import "tailwindcss";
 
+@variant dark (&:is(.dark *));
+
 @layer utilities {
   .animate-fade-in-up {
     animation: fadeInUp 0.8s cubic-bezier(0.4, 0.3, 0.3, 0.3) forwards;
@@ -15,4 +17,8 @@
       transform: translateY(0);
     }
   }
+}
+
+* {
+  @apply transition-colors duration-200;
 }

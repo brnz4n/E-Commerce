@@ -1,11 +1,10 @@
-// src/pages/Profile.tsx
 import { useContext, useState, useEffect } from 'react';
 import { AuthContext } from '../contexts/AuthContext';
 import { Footer } from '../components/Footer';
 import { Link, useNavigate } from 'react-router-dom';
 import { User, Package, LogOut, ShoppingBag, Clock, Truck, CheckCircle, CreditCard } from 'lucide-react';
 import { Header } from '../components/Header';
-import { fetchOrders } from '../services/api'; // Importando nosso serviço de abstração
+import { fetchOrders } from '../services/api';
 
 // Definindo o tipo para os pedidos que vêm do JSON
 interface OrderData {
@@ -25,7 +24,6 @@ export function Profile() {
   // Estado para armazenar os dados que vêm do db.json
   const [orders, setOrders] = useState<OrderData[]>([]);
 
-  // useEffect vai rodar assim que a página abrir para buscar os dados
   useEffect(() => {
     fetchOrders().then((data) => {
       setOrders(data);
@@ -58,7 +56,6 @@ export function Profile() {
   const activeOrders = orders.filter(order => order.isActive);
   const historyOrders = orders.filter(order => !order.isActive);
 
-  // Função auxiliar para mapear o status do JSON para o visual correto (ícones e cores)
   const getStatusVisuals = (status: string) => {
     switch (status) {
       case 'A Pagar': return { icon: CreditCard, color: 'text-orange-500', bg: 'bg-orange-100 dark:bg-orange-900/30' };
@@ -92,13 +89,13 @@ export function Profile() {
               <hr className="border-gray-100 dark:border-gray-700 my-4" />
               
               <div className="flex flex-col gap-2">
-                <button 
+                <button
                   onClick={() => setActiveTab('status')}
                   className={`w-full flex items-center gap-3 p-3 rounded-lg transition font-medium ${activeTab === 'status' ? 'bg-purple-50 text-purple-700 dark:bg-purple-900/20 dark:text-purple-400' : 'text-gray-600 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-700'}`}
                 >
                   <Truck size={20} /> Meus Pedidos
                 </button>
-                <button 
+                <button
                   onClick={() => setActiveTab('history')}
                   className={`w-full flex items-center gap-3 p-3 rounded-lg transition font-medium ${activeTab === 'history' ? 'bg-purple-50 text-purple-700 dark:bg-purple-900/20 dark:text-purple-400' : 'text-gray-600 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-700'}`}
                 >
@@ -108,7 +105,7 @@ export function Profile() {
 
               <hr className="border-gray-100 dark:border-gray-700 my-4" />
 
-              <button 
+              <button
                 onClick={handleLogout}
                 className="w-full flex items-center justify-center gap-2 text-red-600 dark:text-red-400 hover:bg-red-50 dark:hover:bg-red-900/20 p-3 rounded-lg transition font-medium"
               >
@@ -141,7 +138,7 @@ export function Profile() {
                   </div>
 
                   <div className="space-y-4">
-                    {/* Renderizando os dados vindos do JSON */}
+
                     {activeOrders.map((order) => {
                       const visuals = getStatusVisuals(order.status);
                       return (
@@ -170,10 +167,9 @@ export function Profile() {
                   <p className="text-gray-500 dark:text-gray-400 mb-8">Todos os itens que você já comprou conosco.</p>
                   
                   <div className="space-y-4">
-                    {/* Renderizando os dados vindos do JSON */}
                     {historyOrders.map((order) => {
-                       const visuals = getStatusVisuals(order.status);
-                       return (
+                      const visuals = getStatusVisuals(order.status);
+                      return (
                         <div key={order.id} className="flex flex-col sm:flex-row sm:items-center justify-between p-4 border border-gray-100 dark:border-gray-700 rounded-xl opacity-80 hover:opacity-100 transition-opacity">
                           <div className="flex items-center gap-4 mb-3 sm:mb-0">
                             <div className={`p-3 rounded-lg ${visuals.bg}`}><visuals.icon className={visuals.color} size={24} /></div>

@@ -1,4 +1,3 @@
-// src/contexts/AuthContext.tsx
 import { createContext, useState, useEffect, type ReactNode } from 'react';
 import type { User, RegisterData } from '../types/auth';
 
@@ -22,30 +21,40 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     }
   }, []);
 
-  const register = (data: RegisterData) => {
-    // Simulando a criação de um ID único pelo back-end
+  const register = async (data: RegisterData) => {
     const newUser: User = {
-      id: String(Math.random()),
+      id: crypto.randomUUID(),
       name: data.name,
       email: data.email,
+      address: {
+        street: 'Endereço Pendente',
+        number: 'S/N',
+        neighborhood: '-',
+        city: '-',
+        state: '-',
+        zipCode: '00000-000'
+      }
     };
-
     setUser(newUser);
-    // Salvando no LocalStorage conforme exigido no bônus
-    localStorage.setItem('@LoadingJR:user', JSON.stringify(newUser));
+    localStorage.setItem('@loading-jr:user', JSON.stringify(newUser));
   };
 
-const login = (email: string) => {
-    const storedUser = localStorage.getItem('@LoadingJR:user');
-    if (storedUser) {
-        const parsedUser = JSON.parse(storedUser);
-      // Verifica se o email digitado é o mesmo que está salvo no navegador
-        if (parsedUser.email === email) {
-        setUser(parsedUser);
-        return true; // Login deu certo
-        }
-    }
-    return false; // Usuário não encontrado ou email errado
+const login = async (email: string, password?: string) => {
+    const mockUser: User = {
+      id: '1',
+      name: 'Dev Loading Jr',
+      email: email,
+      address: {
+        street: 'Rua Coronel Estanislau Frota',
+        number: 'S/N',
+        neighborhood: 'Centro',
+        city: 'Sobral',
+        state: 'CE',
+        zipCode: '62010-560'
+      }
+    };
+    setUser(mockUser);
+    localStorage.setItem('@loading-jr:user', JSON.stringify(mockUser));
   };
 
   const logout = () => {

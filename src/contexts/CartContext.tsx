@@ -36,13 +36,13 @@ const updateQuantity = (productId: string, newQuantity: number) => {
       removeFromCart(productId);
       return;
     }
-    setCartItems((prev) => 
-      prev.map((item) => 
+    setCartItems((prev) =>
+      prev.map((item) =>
         item.id === productId ? { ...item, quantity: newQuantity } : item
       )
     );
   };
- 
+
   const removeFromCart = (productId: string) => {
     setCartItems((prev) => prev.filter((item) => item.id !== productId));
   };

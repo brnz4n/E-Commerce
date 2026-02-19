@@ -29,7 +29,6 @@ export function FeaturedProducts() {
   return (
     <section className="py-12 bg-gray-50 dark:bg-[#0a0410] transition-colors duration-300">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-        {/* Cabeçalho */}
         <div className="flex justify-between items-center mb-8">
           <h2 className="text-3xl font-bold text-gray-900 dark:text-white">
             Destaques
@@ -49,7 +48,6 @@ export function FeaturedProducts() {
               key={product.id}
               className="bg-white dark:bg-[#150a21] rounded-2xl overflow-hidden shadow-sm hover:shadow-xl transition-shadow border border-gray-100 dark:border-gray-800 flex flex-col group"
             >
-              {/* Imagem */}
               <div
                 onClick={() => setSelectedProduct(product)}
                 className="relative aspect-square bg-gray-100 dark:bg-gray-800 p-6 flex items-center justify-center cursor-pointer overflow-hidden"
@@ -69,7 +67,7 @@ export function FeaturedProducts() {
                 </div>
               </div>
 
-              {/* Informações */}
+              {/* Infos */}
               <div className="p-5 flex flex-col flex-grow justify-between">
                 <div>
                   <Link to={`/product/${product.id}`}>
@@ -119,7 +117,7 @@ export function FeaturedProducts() {
               <X size={20} />
             </button>
 
-            {/* Imagem no Modal */}
+            {/* Imagem do produto */}
             <div className="w-full md:w-1/2 bg-gray-50 dark:bg-gray-700 p-8 flex items-center justify-center">
               <img
                 src={selectedProduct.images[0]}
@@ -128,7 +126,7 @@ export function FeaturedProducts() {
               />
             </div>
 
-            {/* Informações no Modal */}
+            {/* Informações do produto */}
             <div className="w-full md:w-1/2 p-8 flex flex-col justify-center">
               <span className="text-sm font-semibold text-purple-600 dark:text-purple-400 uppercase tracking-wider mb-2">
                 {selectedProduct.category}

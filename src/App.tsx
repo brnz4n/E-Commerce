@@ -10,10 +10,12 @@ import { Footer } from './components/Footer';
 import { CartProvider } from './contexts/CartContext';
 import { Cart } from './pages/Cart';
 import { Checkout } from './pages/Checkout';
+import { ThemeProvider } from './contexts/ThemeContext';
 
 function App() {
   return (
     <BrowserRouter>
+    <ThemeProvider>
       <AuthProvider>
         <CartProvider>
         <div className="min-h-screen flex flex-col">
@@ -35,6 +37,7 @@ function App() {
         </div>
         </CartProvider>
       </AuthProvider>
+    </ThemeProvider>
     </BrowserRouter>
   );
 }

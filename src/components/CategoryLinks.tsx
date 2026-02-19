@@ -13,12 +13,13 @@ export function CategoryLinks() {
       <div className="container mx-auto px-4 sm:px-6 lg:px-8 animate-fade-in-up">
         <h2 className="text-2xl font-bold text-gray-900 dark:text-white mb-6">Compre por Categoria</h2>
         
-        <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
+
           {categories.map((category) => (
-            <Link 
-              key={category.name} 
-              to={`/products?category=${category.name.toLowerCase()}`}
-              className="flex items-center gap-4 p-4 rounded-2xl border border-gray-100 dark:border-gray-800 hover:border-purple-500 dark:hover:border-purple-500 transition-all hover:shadow-md group"
+            <Link
+              key={category.name}
+              to={`/products?category=${encodeURIComponent(category.name)}`}
+              className="flex items-center gap-4 p-4 min-h-[88px] rounded-2xl border border-gray-100 dark:border-gray-800 hover:border-purple-500 dark:hover:border-purple-500 transition-all hover:shadow-md group"
             >
               <div className={`p-3 rounded-xl ${category.color} transition-transform group-hover:scale-110`}>
                 <category.icon size={24} />
