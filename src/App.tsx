@@ -1,4 +1,4 @@
-import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import { BrowserRouter, Routes, Route, HashRouter } from 'react-router-dom';
 import { AuthProvider } from './contexts/AuthContext';
 import { Home } from './pages/Home';
 import { Register } from './pages/Register';
@@ -14,7 +14,7 @@ import { ThemeProvider } from './contexts/ThemeContext';
 
 function App() {
   return (
-    <BrowserRouter>
+    <HashRouter>
     <ThemeProvider>
       <AuthProvider>
         <CartProvider>
@@ -38,7 +38,7 @@ function App() {
         </CartProvider>
       </AuthProvider>
     </ThemeProvider>
-    </BrowserRouter>
+    </HashRouter>
   );
 }
 
