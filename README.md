@@ -16,7 +16,7 @@ O objetivo foi construir uma interface de e-commerce completa, moderna e altamen
 
 ---
 
-## 📸 Telas do Sistema
+##  Telas do Sistema
 
 | Home & Dark Mode | Produtos & Filtros |
 | :---: | :---: |
@@ -32,30 +32,30 @@ O objetivo foi construir uma interface de e-commerce completa, moderna e altamen
 
 ---
 
-## ✨ Funcionalidades Implementadas
+##  Funcionalidades Implementadas
 
 O projeto atende aos requisitos obrigatórios e bônus definidos no processo seletivo:
 
-- **🏠 Home**
+- *** Home**
   - Banners de destaque
   - Produtos em alta
   - Navegação rápida por categorias
 
-- **🛍️ Listagem Dinâmica de Produtos**
+- *** Listagem Dinâmica de Produtos**
   - Busca por texto
   - Filtro por categorias
   - Estado sincronizado via URL
 
-- **📦 Visualização de Produto**
+- *** Visualização de Produto**
   - Modal e página dedicada
   - Informações detalhadas (preço, descrição, estoque)
 
-- **🔐 Autenticação**
+- *** Autenticação**
   - Login e Registro
   - Fluxo otimizado para conversão
   - Layout inspirado em grandes plataformas de e-commerce
 
-- **👤 Perfil do Usuário**
+- *** Perfil do Usuário**
   - Visualização de pedidos ativos
   - Histórico de compras
   - Status visuais:
@@ -64,20 +64,20 @@ O projeto atende aos requisitos obrigatórios e bônus definidos no processo sel
     - A Caminho
     - Entregue
 
-- **🛒 Carrinho & Checkout (Extra)**
+- *** Carrinho & Checkout (Extra)**
   - Adição e remoção de produtos
   - Cálculo de valores
   - Simulação de checkout completo
 
 ---
 
-## 🌟 Diferenciais (Bônus)
+##  Diferenciais (Bônus)
 
-- **🌗 Dark / Light Mode Nativo**
+- *** Dark / Light Mode Nativo**
   - Gerenciado via Tailwind CSS v4 + Context API
   - Preferência de tema salva no dispositivo
 
-- **💾 Persistência de Dados**
+- *** Persistência de Dados**
   - Sessão do usuário
   - Tema selecionado
   - Itens do carrinho
@@ -85,7 +85,7 @@ O projeto atende aos requisitos obrigatórios e bônus definidos no processo sel
 
 ---
 
-## 🛠️ Tecnologias Utilizadas
+##  Tecnologias Utilizadas
 
 A stack foi escolhida visando escalabilidade, tipagem forte e fácil manutenção:
 
@@ -101,7 +101,7 @@ A stack foi escolhida visando escalabilidade, tipagem forte e fácil manutençã
 
 ---
 
-## 🏗️ Arquitetura e Abstração de Dados
+##  Arquitetura e Abstração de Dados
 
 Um dos principais focos do projeto foi preparar o Frontend para integração futura com um back-end real.
 
@@ -112,9 +112,9 @@ Um dos principais focos do projeto foi preparar o Frontend para integração fut
 
 ---
 
-## 📄 Documentação da Mock API
+##  Documentação da Mock API
 
-### 🧩 Entidade: Produto (`Product`)
+###  Entidade: Produto (`Product`)
 
 | Campo | Tipo | Descrição |
 | :--- | :--- | :--- |
@@ -128,7 +128,7 @@ Um dos principais focos do projeto foi preparar o Frontend para integração fut
 
 ---
 
-### 📦 Entidade: Pedido (`Order`)
+###  Entidade: Pedido (`Order`)
 
 | Campo | Tipo | Descrição |
 | :--- | :--- | :--- |
@@ -141,7 +141,7 @@ Um dos principais focos do projeto foi preparar o Frontend para integração fut
 
 ---
 
-## 🚀 Como executar o projeto localmente
+##  Como executar o projeto localmente
 
 ### 1️⃣ Clone o repositório
 ```bash

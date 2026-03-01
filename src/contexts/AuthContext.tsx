@@ -13,15 +13,14 @@ export const AuthContext = createContext<AuthContextType>({} as AuthContextType)
 export function AuthProvider({ children }: { children: ReactNode }) {
   const [user, setUser] = useState<User | null>(null);
 
-  // Assim que o app abre, verifica se já tem alguém logado no LocalStorage
   useEffect(() => {
-    const storedUser = localStorage.getItem('@LoadingJR:user');
+    const storedUser = localStorage.getItem('@loading-jr:user');
     if (storedUser) {
       setUser(JSON.parse(storedUser));
     }
   }, []);
 
-  const register = async (data: RegisterData) => {
+  const register = (data: RegisterData) => {
     const newUser: User = {
       id: crypto.randomUUID(),
       name: data.name,
@@ -39,10 +38,23 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     localStorage.setItem('@loading-jr:user', JSON.stringify(newUser));
   };
 
-const login = async (email: string, password?: string) => {
+  const login = (email: string, password?: string) => {
+    const storedUser = localStorage.getItem('@loading-jr:user');
+    
+    if (storedUser) {
+      const parsedUser = JSON.parse(storedUser);
+      if (parsedUser.email === email) {
+        setUser(parsedUser);
+        return true;
+      }
+    }
+
+    const nameFromEmail = email.split('@')[0];
+    const dynamicName = nameFromEmail.charAt(0).toUpperCase() + nameFromEmail.slice(1);
+
     const mockUser: User = {
-      id: '1',
-      name: 'Dev Loading Jr',
+      id: crypto.randomUUID(),
+      name: dynamicName,
       email: email,
       address: {
         street: 'Rua Coronel Estanislau Frota',
@@ -53,13 +65,15 @@ const login = async (email: string, password?: string) => {
         zipCode: '62010-560'
       }
     };
+    
     setUser(mockUser);
     localStorage.setItem('@loading-jr:user', JSON.stringify(mockUser));
+    return true;
   };
 
   const logout = () => {
     setUser(null);
-    localStorage.removeItem('@LoadingJR:user');
+    localStorage.removeItem('@loading-jr:user');
   };
 
   return (

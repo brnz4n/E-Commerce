@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { useParams, Link } from 'react-router-dom';
+import { useParams, Link, useNavigate } from 'react-router-dom';
 import { ArrowLeft, ShoppingCart, Check, ChevronLeft, ChevronRight } from 'lucide-react';
 import { getProductById } from '../services/api';
 import type { Product } from '../types/Product';
@@ -8,6 +8,7 @@ import { Header } from '../components/Header';
 
 export function ProductDetails() {
   const { id } = useParams();
+  const navigate = useNavigate();
   const [product, setProduct] = useState<Product | null>(null);
   const [loading, setLoading] = useState(true);
   const { addToCart } = useCart();
@@ -38,11 +39,17 @@ export function ProductDetails() {
     );
   };
 
+  const handleBuyNow = () => {
+    if (product) {
+      addToCart(product);
+      navigate('/checkout');
+    }
+  };
+
   if (loading) return <div className="text-center py-20">Carregando detalhes...</div>;
   if (!product) return <div className="text-center py-20">Produto não encontrado! 😢</div>;
 
   return (
-
     <div className="min-h-screen bg-white dark:bg-[#0f061a] text-gray-900 dark:text-gray-100 transition-colors duration-300">
       
       <Header />
@@ -133,6 +140,7 @@ export function ProductDetails() {
               </button>
 
               <button
+                onClick={handleBuyNow}
                 className="flex-1 md:flex-none bg-green-600 hover:bg-green-700 text-white px-6 py-4 rounded-xl font-bold shadow-lg shadow-green-200 dark:shadow-none flex items-center gap-3 justify-center transition-transform hover:scale-105 active:scale-95"
               >
                 <ShoppingCart size={20} />
