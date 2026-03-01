@@ -36,26 +36,26 @@ O objetivo foi construir uma interface de e-commerce completa, moderna e altamen
 
 O projeto atende aos requisitos obrigatórios e bônus definidos no processo seletivo:
 
-- ** Home**
+- *** Home**
   - Banners de destaque
   - Produtos em alta
   - Navegação rápida por categorias
 
-- ** Listagem Dinâmica de Produtos**
+- *** Listagem Dinâmica de Produtos**
   - Busca por texto
   - Filtro por categorias
   - Estado sincronizado via URL
 
-- ** Visualização de Produto**
+- *** Visualização de Produto**
   - Modal e página dedicada
   - Informações detalhadas (preço, descrição, estoque)
 
-- ** Autenticação**
+- *** Autenticação**
   - Login e Registro
   - Fluxo otimizado para conversão
   - Layout inspirado em grandes plataformas de e-commerce
 
-- ** Perfil do Usuário**
+- *** Perfil do Usuário**
   - Visualização de pedidos ativos
   - Histórico de compras
   - Status visuais:
@@ -64,7 +64,7 @@ O projeto atende aos requisitos obrigatórios e bônus definidos no processo sel
     - A Caminho
     - Entregue
 
-- ** Carrinho & Checkout (Extra)**
+- *** Carrinho & Checkout (Extra)**
   - Adição e remoção de produtos
   - Cálculo de valores
   - Simulação de checkout completo
@@ -73,11 +73,11 @@ O projeto atende aos requisitos obrigatórios e bônus definidos no processo sel
 
 ##  Diferenciais (Bônus)
 
-- ** Dark / Light Mode Nativo**
+- *** Dark / Light Mode Nativo**
   - Gerenciado via Tailwind CSS v4 + Context API
   - Preferência de tema salva no dispositivo
 
-- ** Persistência de Dados**
+- *** Persistência de Dados**
   - Sessão do usuário
   - Tema selecionado
   - Itens do carrinho
